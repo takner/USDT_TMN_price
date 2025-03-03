@@ -7,19 +7,6 @@ services:
     networks:
       - isolated-network
 
-  nginx:
-    image: nginx:latest
-    ports:
-      - "8081:80"  
-      - "443:443"
-    volumes:
-      - ./nginx-conf:/etc/nginx/conf.d 
-      - ./ssl:/etc/nginx/ssl
-    depends_on:
-      - flask
-    networks:
-      - isolated-network
-
 networks:
   isolated-network:
     external: true 
