@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  flask:
+    build: . 
+    ports:
+      - "5000" 
+    networks:
+      - isolated-network
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"  
+      - "443:443"
+    volumes:
+      - ./nginx-conf:/etc/nginx/conf.d 
+      - ./ssl:/etc/nginx/ssl
+    depends_on:
+      - flask
+    networks:
+      - isolated-network
+
+networks:
+  isolated-network:
+    external: true 
